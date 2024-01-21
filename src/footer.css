@@ -1,0 +1,8 @@
+.background{
+    background-color: brown;
+    flex: 1;
+    height: 80px;
+}
+.text{
+    color: white;
+}
