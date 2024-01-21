@@ -1,12 +1,10 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-// OR
-// const { ModuleFederationPlugin } = require("webpack").container;
 
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: "http://localhost:3000/",
   },
 
   resolve: {
@@ -14,14 +12,14 @@ module.exports = {
   },
 
   devServer: {
-    port: 3001,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers":
-        "X-Requested-With, content-type, Authorization",
-    },
-    historyApiFallback: true,
+    port: 3000,
+    // headers: {
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    //   "Access-Control-Allow-Headers":
+    //     "X-Requested-With, content-type, Authorization",
+    // },
+    historyApiFallback: false,
   },
 
   module: {
@@ -49,14 +47,14 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "nav",
+      name: "host",
       filename: "remoteEntry.js",
       remotes: {
         store: "store@http://localhost:3002/remoteEntry.js",
+        nav: "nav@http://localhost:3001/remoteEntry.js",
       },
       exposes: {
-        "./Header": "./src/Header",
-        "./Footer": "./src/Footer",
+        "./store": "./src/store",
       },
       shared: {
         ...deps,
