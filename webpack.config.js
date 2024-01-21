@@ -50,8 +50,8 @@ module.exports = {
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        store: "store@http://localhost:3002/remoteEntry.js",
-        nav: "nav@http://localhost:3001/remoteEntry.js",
+        store: "store@https://micro-frontend-store-seven.vercel.app/remoteEntry.js",
+        nav: "nav@https://micro-frontend-module.vercel.app/remoteEntry.js",
       },
       exposes: {
         "./store": "./src/store",
